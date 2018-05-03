@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="manage_tour Maven Webapp">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="manage_common Maven Webapp.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/manage_common Maven Webapp/manage_common Maven Webapp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="manage_tour"/>
+        <property name="java-output-path" value="/manage_tour Maven Webapp/target/classes"/>
+    </wb-module>
+</project-modules>
