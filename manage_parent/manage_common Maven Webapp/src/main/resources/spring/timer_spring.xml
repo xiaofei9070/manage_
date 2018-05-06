@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/cache
+			http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+			http://www.springframework.org/schema/beans
+		    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	 
+	<!--启动定时任务监听 -->
+<!-- 	<bean id="startQuartz"  lazy-init="false" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref  bean="execUpdateShopZydExpiredDateTimerTrigger"/>
+				<ref  bean="execUpdateTenOrderExpiredDateTimerTrigger"/>
+				<ref bean="execUpdateShopOrderExpireDateTimerTrigger"/>
+				<ref bean="execUpdateShopCaiGouExpireDateTimerTrigger"/> 
+				<ref  bean="execUpdateShopProductRankTimerTrigger"/>  
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="execUpdateShopZydExpiredDateTimerTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	
+		<property name="jobDetail" >
+			<ref bean="execUpdateShopZydExpiredDateTimer"/>		
+		</property>
+		
+		<property name="cronExpression">
+			<value>00 00 0 * * ?</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="execUpdateShopZydExpiredDateTimer" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	
+		<property name="targetObject">
+			<ref bean="execUpdateShopZydExpiredDateService"/>
+		</property>
+		<property name="targetMethod">
+			<value>execUpdateShopZydExpiredDate</value>
+		</property>
+		<property name="concurrent" value="true"></property>
+	</bean> -->
+	
+	
+</beans>

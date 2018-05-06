@@ -4,5 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/src/test/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <wb-resource deploy-path="/" source-path="/statics"/>
+        <wb-resource deploy-path="/" source-path="/ui"/>
     </wb-module>
 </project-modules>

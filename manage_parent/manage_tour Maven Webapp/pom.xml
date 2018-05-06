@@ -26,11 +26,6 @@
       <artifactId>manage_common</artifactId>
       <version>1.1.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>com.manage.common</groupId>
-      <artifactId>manage_common</artifactId>
-      <version>1.1.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
