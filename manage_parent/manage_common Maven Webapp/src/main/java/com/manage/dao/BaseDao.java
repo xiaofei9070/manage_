@@ -2,6 +2,7 @@ package com.manage.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -222,5 +223,21 @@ public class BaseDao{
 		}
 		return sqlTemplate.selectList(ns+sqlId,  params.getParams());
 	}
+	
+	
+	public Map<String,Object> getMap(String ns,String  sqlId,SqlParams params){
+		if (null==params) {
+			return sqlTemplate.selectOne(ns+sqlId);
+		}
+		return sqlTemplate.selectOne(ns+sqlId,  params.getParams());
+	}
+	
+	public List<Map<String,Object>> getMapList(String ns,String  sqlId,SqlParams params){
+		if (null==params) {
+			return sqlTemplate.selectList(ns+sqlId);
+		}
+		return sqlTemplate.selectList(ns+sqlId,  params.getParams());
+	}
+	
 	
 }

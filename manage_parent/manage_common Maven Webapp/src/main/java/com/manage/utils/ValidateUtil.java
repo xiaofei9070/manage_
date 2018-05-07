@@ -19,7 +19,7 @@ public class ValidateUtil{
 	 * @return true or false
 	 */
 	public static boolean validateBlank(String src){
-		return (src == null) || src.trim().equals("") ;
+		return (src == null) || src.trim().equals("") || src.equals("undefined") || src.equals("null") || src.trim().length() == 0;
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class ValidateUtil{
 	 * @return
 	 */
 	public static boolean ValidateImage(String name){
-		String regex = "^(.*)\\.(jpg|png|bmp|jpeg|gif)$";
+		String regex = "^(.*)\\.(jpg|png|bmp|jpeg)$";
 		if(!validateBlank(name)){
 			name = name.trim().toLowerCase();
 			return Pattern.compile(regex).matcher(name).matches();
