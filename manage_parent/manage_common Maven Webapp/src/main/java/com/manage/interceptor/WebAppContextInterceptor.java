@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.manage.SysConst;
+import com.manage.statics.SysConst;
 
 
 public class WebAppContextInterceptor implements ServletContextListener{

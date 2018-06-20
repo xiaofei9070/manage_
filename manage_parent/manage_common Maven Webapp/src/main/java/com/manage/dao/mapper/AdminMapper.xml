@@ -125,4 +125,12 @@
       head_pre = #{headPre,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <!-- 以上为自动生成 -->
+  
+  <select id="findAdminInfo" parameterType="string" resultType="com.manage.model.Admin">
+  	select id,salt,pwd,name
+  	from admin
+  	where name=#{name}
+  </select>
+  
 </mapper>

@@ -55,4 +55,14 @@
     set num = #{num,jdbcType=INTEGER}
     where name = #{name,jdbcType=VARCHAR}
   </update>
+  <!-- 以上为自动生成 -->
+  
+  <select id="getMaxKeyByType" parameterType="map" resultType="com.manage.model.SysKey">
+  	select num from sys_key where name=#{type}
+  </select>
+  
+  <update id="autoIncKeyByType" parameterType="map">
+  	update sys_key set num=#{newMax} where name=#{type}
+  </update>
+  
 </mapper>

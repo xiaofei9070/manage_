@@ -6,6 +6,8 @@ import org.springframework.web.method.HandlerMethod;
 
 import com.manage.ehcache.EhCache;
 import com.manage.exceptions.UserNoLoginException;
+import com.manage.model.Admin;
+import com.manage.statics.SysConst;
 import com.manage.utils.ValidateUtil;
 
 
@@ -23,10 +25,17 @@ public class AuthRequire {
 			return true;
 		}
 		String permission = vali.value();
-		Object object = EhCache.get(EhCache.permiss, req.getSession().getId());
-		if(object == null){
+		Object attribute = req.getSession().getAttribute(SysConst.USER);
+		Object object = null;
+		if(attribute != null){
+			object = EhCache.get(EhCache.permiss, ((Admin) attribute).getId());
+			if(object == null){
+				throw new UserNoLoginException("User is not login");
+			}
+		}else{
 			throw new UserNoLoginException("User is not login");
 		}
+		
 		
 		if(AuthCode.Null.equals(permission)){
 			return true;

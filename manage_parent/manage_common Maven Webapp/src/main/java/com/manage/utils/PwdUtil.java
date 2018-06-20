@@ -48,8 +48,8 @@ public class PwdUtil {
 	
 	public static void main(String[] args) {
 		Admin user = new Admin();
-		user.setId("9003");
-		user.setPwd("9");
+		user.setId("10000");
+		user.setPwd("666666");
 		user.setSalt(RandomKeyUtil.getDefaultKey());
 		Admin encodePwd = encodePwd(user);
 		System.out.println(user.getSalt());
