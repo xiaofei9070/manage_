@@ -6,6 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.manage.model.Admin;
+import com.manage.statics.SysConst;
+
 public class BaseController {
 	
 	protected HttpServletRequest req;
@@ -17,6 +20,15 @@ public class BaseController {
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
+	}
+	
+	
+	protected Admin getUser(){
+		Object object = session.getAttribute(SysConst.USER);
+		if(object != null){
+			return (Admin) object;
+		}
+		return null;
 	}
 	
 }

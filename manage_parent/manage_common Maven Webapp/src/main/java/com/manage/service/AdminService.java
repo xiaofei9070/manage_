@@ -1,5 +1,7 @@
 package com.manage.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,11 @@ import org.springframework.stereotype.Service;
 import com.manage.dao.AdminDao;
 import com.manage.ehcache.EhCache;
 import com.manage.model.Admin;
+import com.manage.model.SqlParams;
+import com.manage.permissions.Auth;
 import com.manage.statics.SysConst;
 import com.manage.utils.PwdUtil;
+import com.manage.vo.AdminVo;
 import com.manage.vo.BaseVo;
 
 
@@ -20,6 +25,11 @@ public class AdminService {
 	
 	@Autowired
 	private AdminDao adminDao;
+	@Autowired
+	private PermissionService permissionService;
+	@Autowired
+	private RoleService roleService;
+	
 	
 	public int saveAdmin(Admin admin){
 		return adminDao.save(ns, "insertSelective", admin);
@@ -43,7 +53,28 @@ public class AdminService {
 				user.setPwd(null);
 				user.setSalt(null);
 				session.setAttribute(SysConst.USER, user);
-				EhCache.put(EhCache.permiss, user.getId(), "");
+				Auth auth = new Auth();
+				auth.setId(user.getId());
+				auth.setName(name);
+				List<String> permissions = permissionService.findPermission(user.getId());
+				if(permissions != null && permissions.size() != 0){
+					StringBuilder per = new StringBuilder();
+					for(int i = 0;i < permissions.size(); i ++){
+						per.append(permissions.get(i)).append(";");
+					}
+					auth.setPermission(per.toString());
+				}
+				
+				List<String> findRole = roleService.findRole(user.getId());
+				if(findRole != null && findRole.size() != 0){
+					StringBuilder roles = new StringBuilder();
+					for(int i = 0;i < findRole.size(); i ++){
+						roles.append(findRole.get(i)).append(",");
+					}
+					auth.setRoleName(roles.toString());
+				}
+				
+				EhCache.put(EhCache.permiss, user.getId(), auth);
 			}else{
 				vo.setMsg("Username or Password is error");
 				vo.setStatus(300);
@@ -54,5 +85,15 @@ public class AdminService {
 		return vo;
 	}
 	
+	
+	public int updatePassword(Admin admin){
+		PwdUtil.encodePwd(admin);
+		return adminDao.update(ns, "updatePassword", admin);
+	}
+	
+	
+	public List<AdminVo> findAdminList(SqlParams params){
+		return adminDao.getList(ns, "findAdminList", params);
+	}
 	
 }

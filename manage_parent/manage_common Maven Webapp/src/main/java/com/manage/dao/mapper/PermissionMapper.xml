@@ -80,4 +80,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <!-- 以上为自动生成 -->
+  
+  <select id="findPermission" parameterType="string" resultType="string">
+  	select url
+  	from permission p
+  	left join role_permiss rp on rp.permiss_id=p.id
+  	left join role r on r.id=rp.role_id
+  	left join admin_role ar on ar.role_id=r.id
+  	where ar.admin_id=#{id}
+  </select>
+  
 </mapper>

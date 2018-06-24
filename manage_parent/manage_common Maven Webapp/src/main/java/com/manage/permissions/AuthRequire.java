@@ -1,6 +1,7 @@
 package com.manage.permissions;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.method.HandlerMethod;
 
@@ -37,13 +38,13 @@ public class AuthRequire {
 		}
 		
 		
-		if(AuthCode.Null.equals(permission)){
+		if(AuthCode.Null.getPermission().equals(permission)){
 			return true;
 		}
 		
 		Auth auth = (Auth) object;
 		if(!ValidateUtil.validateBlank(auth.getPermission())){
-			if((AuthCode.Allow + ";").equals(auth.getPermission())){
+			if((AuthCode.Allow.getPermission() + ";").equals(auth.getPermission())){
 				return true;
 			}
 			if((permission + ";").indexOf(auth.getPermission()) != -1){
@@ -51,6 +52,14 @@ public class AuthRequire {
 			}
 		}
 		throw new PermissionException("ERROR Permission denied");
+	}
+	
+	public static void logout(HttpSession session){
+		Object attribute = session.getAttribute(SysConst.USER);
+		if(attribute != null){
+			EhCache.del(EhCache.permiss, ((Admin) attribute).getId());
+		}
+		session.setAttribute(SysConst.USER, null);
 	}
 	
 }

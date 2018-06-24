@@ -9,133 +9,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>login</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-  <!-- Bootstrap Core CSS -->
-<link href="statics/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS -->
-<link href="statics/css/style.css" rel='stylesheet' type='text/css' />
-<!-- Graph CSS -->
-<link href="statics/css/font-awesome.css" rel="stylesheet"> 
-<!-- jQuery -->
-<!-- lined-icons -->
-<link rel="stylesheet" href="statics/css/icon-font.min.css" type='text/css' />
-<!-- //lined-icons -->
-<!-- chart -->
-<script src="statics/js/Chart.js"></script>
-<!-- //chart -->
-<!--animate-->
-<link href="statics/css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="statics/js/wow.min.js"></script>
-	<script>
-		 new WOW().init();
-	</script>
-<!--//end-animate-->
-<!----webfonts--->
-<!--<link href='http://fonts.useso.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>-->
-<!---//webfonts---> 
- <!-- Meters graphs -->
-<script src="statics/js/jquery-1.10.2.min.js"></script>
-<!-- Placed js at the end of the document so the pages load faster -->
-  </head>
-  
-  <body>
-    <section>
-			<div id="page-wrapper" class="sign-in-wrapper">
-				<div class="graphs">
-					<div class="sign-in-form">
-						<div class="sign-in-form-top">
-							<p><span>Sign In to</span> <a href="home">Admin</a></p>
-						</div>
-						<div class="signin">
-							<div class="signin-rit">
-								<span class="checkbox1">
-									 <label class="checkbox"><input type="checkbox" name="checkbox" checked="">Forgot Password ?</label>
-								</span>
-								<p><a href="#">Click Here</a> </p>
-								<div class="clearfix"> </div>
-							</div>
-							<form method="post" action="toLogin" id="dataInfo">
-							<div class="log-input">
-								<div class="log-input-left">
-								   <input type="text" class="user" name="name" value="Yourname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address:';}"/>
-								</div>
-								<span class="checkbox2">
-									 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i></label>
-								</span>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="log-input">
-								<div class="log-input-left">
-								   <input type="password" class="lock" name="pwd" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address:';}"/>
-								</div>
-								<span class="checkbox2">
-									 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i></label>
-								</span>
-								<div class="clearfix"> </div>
-							</div>
-							<input type="submit" value="Login to your account" id="loginBtn">
-						</form>	 
-						</div>
-						<div class="new_people">
-							<a href="sign-up.html">Register Now!</a>
-						</div>
-					</div>
+	  <title>LoginPage</title>
+	  <meta charset="utf-8">
+	  <meta name="renderer" content="webkit">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	  <link rel="stylesheet" href="statics/layui/css/layui.css"  media="all">
+	  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+	  <style>
+	  	.layui-input{padding-left:35px;margin-bottom: 30px;}
+	  	.layui-form-item{position: relative;}
+	  	.layadmin-user-login-icon{position: absolute;left: 1px;top: 1px;width: 35px;line-height: 36px;text-align: center;color: #d2d2d2;}
+	  </style>
+	</head>
+		<body>
+		<div class="" style="margin:100px auto 0;width:340px;height:400px;">
+			<form class="layui-form" method="post" onsubmit="return false">
+				<div class="layui-form-item">
+				    <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+				     <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入账号" class="layui-input">
 				</div>
-			</div>
-	</section>
-	
-<script src="statics/js/jquery.nicescroll.js"></script>
-<script src="statics/js/scripts.js"></script>
-<!-- Bootstrap Core JavaScript -->
-   <script src="statics/js/bootstrap.min.js"></script>
-   <script type="text/javascript">
-   	window.onload = function(){
-   		var dataInfo = document.getElementById('dataInfo');
-   		dataInfo.onsubmit = function(){
-   			return false;
-   		};
-   	};
-   	$(function(){
-   		$('#loginBtn').bind('click',function(){
-   			$.ajax({
-   				url:$('#loginBtn').parents('form').attr('action'),
-   				data:$('#loginBtn').parents('form').serialize(),
-   				type:'POST',
-   				dataType:'json',
-   				beforeSend:function(){
-   					$('#loginBtn').popover('destroy');
-   				},
-   				success:function(data){
-   					if(data.status == 200){
-   						
-   					}else{
-   						$('#loginBtn').popover({
-   							content:data.msg,
-   							placement:'top'
-   						});
-   	   					$('#loginBtn').popover('show');
-   					}
-   				},
-   				complete:function(){
-   					setTimeout(function(){
-   						$('#loginBtn').popover('destroy');
-   					}, 2000);
-   				}
-   			});
-   		});
-   	});
-   </script>
-</body>
+				<div class="layui-form-item">
+					<label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+				    <input type="password" name="pwd" lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
+				</div>
+				<button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="form" >登录</button>
+			</form>
+		</div>
+		
+	</body>
+	<script src="statics/layui/layui.all.js" type="text/javascript"></script>
+	<script>
+		layui.use(['form','jquery'],function(){
+			var form = layui.form,$ = layui.jquery;
+			
+			//监听提交
+			form.on('submit(form)', function(data){
+			    $.ajax({
+			    	url:'toLogin',
+			    	data:data.field,
+			    	type:'POST',
+			    	dataType:'json',
+			    	beforeSend:function(){
+			    		layer.load();
+			    	},
+			    	success:function(data){
+			    		if(data != null && data.status == 200){
+			    			location.href = 'home';
+			    		}else{
+			    			layer.tips(data.msg,'[lay-filter="form"]', {
+			    				  tips: [3, 'red'],
+			    				  time: 2000
+			    				});
+			    		}
+			    	},
+			    	complete:function(){
+			    		layer.closeAll('loading');
+			    	}
+			    });
+			});
+		})
+		
+	</script>
 </html>
