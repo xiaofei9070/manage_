@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.manage.model.BaseModel;
 import com.manage.model.SqlParams;
+import com.manage.vo.PageData;
 
 
 
@@ -239,5 +240,27 @@ public class BaseDao{
 		return sqlTemplate.selectList(ns+sqlId,  params.getParams());
 	}
 	
+	public <E> PageData<E> findResult(String ns,String listSqlId,String countSqlId,SqlParams params,Integer pageNo,Integer pageSize){
+		Long c = null;
+		if(params == null){
+			c = sqlTemplate.selectOne(ns + countSqlId);
+		}else{
+			c = sqlTemplate.selectOne(ns + countSqlId,params.getParams());
+		}
+		c = c == null ? 0 : c;
+		PageData<E> result = new PageData<E>();
+		if(c == 0){
+			result.setData(null);
+			result.setCount(c);
+		}else{
+			if(pageNo == null || pageNo < 1) pageNo = 1;
+			int begin = (pageNo - 1)*pageSize;
+			params.addParam("pageSize", pageSize).addParam("begin", begin);
+			List<E> selectList = sqlTemplate.selectList(ns + listSqlId, params.getParams());
+			result.setData(selectList);
+			result.setCount(c);
+		}
+		return result;
+	}
 	
 }

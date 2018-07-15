@@ -132,5 +132,11 @@
   	from admin
   	where name=#{name}
   </select>
-  
+  <select id="findAdminList" parameterType="map" resultType="com.manage.vo.AdminVo">
+  	select id,name,email,phone,head_img headImg,head_pre headPre
+  	from admin
+  </select>
+  <select id="findAdminListCount" parameterType="map" resultType="long">
+  	select count(*) from admin
+  </select>
 </mapper>

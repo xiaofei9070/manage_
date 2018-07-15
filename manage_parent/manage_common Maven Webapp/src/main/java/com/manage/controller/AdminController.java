@@ -57,15 +57,8 @@ public class AdminController extends BaseController {
 			if(pageSize == null){
 				pageSize = 30;
 			}
-			System.out.println("da");
-			PageHelper.startPage(pageNo, pageSize);
-			List<AdminVo> findAdminList = adminService.findAdminList(SqlParams.init().addParam("key", key));
-			PageInfo<AdminVo> pageInfo = new PageInfo<AdminVo>(findAdminList);
-			
-			PageData<AdminVo> data = new PageData<AdminVo>();
+			PageData<AdminVo> data = adminService.findAdminList(SqlParams.init().addParam("key", key), pageNo, pageSize);
 			data.setCode(0);
-			data.setCount(pageInfo.getTotal());
-			data.setData(data.getData());
 			return data;
 		} catch (Exception e) {
 			e.printStackTrace();

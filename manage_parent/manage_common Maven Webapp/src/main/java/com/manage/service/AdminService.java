@@ -16,6 +16,7 @@ import com.manage.statics.SysConst;
 import com.manage.utils.PwdUtil;
 import com.manage.vo.AdminVo;
 import com.manage.vo.BaseVo;
+import com.manage.vo.PageData;
 
 
 @Service
@@ -92,8 +93,8 @@ public class AdminService {
 	}
 	
 	
-	public List<AdminVo> findAdminList(SqlParams params){
-		return adminDao.getList(ns, "findAdminList", params);
+	public PageData<AdminVo> findAdminList(SqlParams params,Integer pageNo,Integer pageSize){
+		return adminDao.findResult(ns, "findAdminList", "findAdminListCount", params, pageNo, pageSize);
 	}
 	
 }
