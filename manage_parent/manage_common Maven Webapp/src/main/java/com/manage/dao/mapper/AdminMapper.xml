@@ -133,8 +133,9 @@
   	where name=#{name}
   </select>
   <select id="findAdminList" parameterType="map" resultType="com.manage.vo.AdminVo">
-  	select id,name,email,phone,head_img headImg,head_pre headPre
+  	select id,name,email,phone,head_img headImg,head_pre headPre,status
   	from admin
+  	order by id desc
   </select>
   <select id="findAdminListCount" parameterType="map" resultType="long">
   	select count(*) from admin

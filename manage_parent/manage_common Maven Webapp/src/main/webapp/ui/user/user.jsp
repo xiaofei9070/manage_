@@ -19,18 +19,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>  
  
+ <script type="text/html" id="switchNormal">
+  <input type="checkbox" name="status" value="{{d.status}}" lay-skin="switch" lay-text="正常|禁用" lay-filter="status" {{ d.status == 1 ? 'checked' : '' }}>
+</script>
+ 
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-<div class="layui-btn-group">
-    <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-    <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-    <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-    <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
+<div class="layui-con" style="margin:10px;">
+	<div class="layui-btn-group">
+    <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe654;</i></button>
+    <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i></button>
+    <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe640;</i></button>
+    <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe669;</i></button>
   </div> 
-    <table class="layui-hide" id="test" lay-filter="demo"></table>           
+    <table class="layui-hide" id="test" lay-filter="demo"></table> 
+</div>          
           
 <script src="statics/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -39,15 +45,18 @@ layui.use('table', function(){
   var table = layui.table;
   table.render({
 	    elem: '#test'
-	    ,height: 332
+	    ,height:'full-100'
+	    ,cellMinWidth: 80
 	    ,method:'POST'
 	    ,url: 'admin/userList' //数据接口
 	    ,page: true //开启分页
+	    ,limit:30
 	    ,cols: [[ //表头
-	      {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+	      {field: 'id', title: '编号', width:80, sort: true, fixed: 'left'}
 	      ,{field: 'name', title: '用户名', width:80}
 	      ,{field: 'email', title: '邮箱', width: 170}
 	      ,{field: 'phone', title: '手机', width: 80, sort: true}
+	      ,{field:'status', title:'状态', width:90, templet: '#switchNormal', unresize: true}
 	      ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
 	    ]]
 	  });

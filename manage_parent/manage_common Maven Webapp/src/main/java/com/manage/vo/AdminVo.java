@@ -18,6 +18,8 @@ public class AdminVo implements Serializable{
     private String headImg;
 
     private String headPre;
+    
+    private Byte status;
 
 	public String getId() {
 		return id;
@@ -81,6 +83,14 @@ public class AdminVo implements Serializable{
 
 	public void setHeadPre(String headPre) {
 		this.headPre = headPre;
+	}
+
+	public Byte getStatus() {
+		return status;
+	}
+
+	public void setStatus(Byte status) {
+		this.status = status;
 	}
     
 }

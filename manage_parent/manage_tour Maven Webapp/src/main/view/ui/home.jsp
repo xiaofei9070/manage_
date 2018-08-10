@@ -114,10 +114,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </a>
               <dl class="layui-nav-child">
                 <dd>
-                  <a href="javascript:;" lay-href="user/user">网站用户</a>
+                  <a href="javascript:;" onclick="layer.tips('即将开放', this);">网站用户</a>
                 </dd>
                 <dd>
-                  <a href="javascript:;" onclick="layer.tips('即将开放', this);">后台管理员</a>
+                  <a href="javascript:;" lay-href="user/user">后台管理员</a>
                 </dd>
                 <dd>
                   <a href="javascript:;" onclick="layer.tips('即将开放', this);">角色管理</a>
